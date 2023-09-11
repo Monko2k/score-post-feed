@@ -122,6 +122,14 @@ async def send_feeds(submission):
 
 @bot.event
 async def monitor():
+    while True:
+        try:
+            await runFeed()
+        except Exception as e:
+            # dump this to stdout idc
+            print("Exception: %s", e)
+
+async def runFeed():
     reddit = asyncpraw.Reddit(
         client_id = config["reddit"]["client_id"],
         client_secret = config["reddit"]["client_secret"],
